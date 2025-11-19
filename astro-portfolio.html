@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Nome Cognome - Astrofisica</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+        
+        /* Stelle animate nello sfondo */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        /* Container principale */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header */
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        header h1 {
+            font-size: 3em;
+            background: linear-gradient(45deg, #667eea, #764ba2, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.3em;
+            color: #a8b2d1;
+        }
+        
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 25px;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        nav a:hover {
+            background: rgba(102, 126, 234, 0.3);
+            transform: translateY(-2px);
+            border-color: #667eea;
+        }
+        
+        /* Sezioni */
+        section {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            margin-bottom: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        section h2 {
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            color: #667eea;
+        }
+        
+        section p {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            color: #ccd6f6;
+        }
+        
+        /* Griglia progetti */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+        
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: #764ba2;
+            box-shadow: 0 10px 30px rgba(118, 75, 162, 0.3);
+        }
+        
+        .project-card h3 {
+            color: #f093fb;
+            margin-bottom: 10px;
+        }
+        
+        /* Immagini */
+        .image-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 10px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1em;
+        }
+        
+        /* Per le tue immagini vere */
+        img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        /* Link */
+        a.link-button {
+            display: inline-block;
+            color: #667eea;
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            border-radius: 25px;
+            margin: 10px 5px;
+            transition: all 0.3s;
+        }
+        
+        a.link-button:hover {
+            background: #667eea;
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #8892b0;
+            margin-top: 40px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+            
+            section {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Stelle animate -->
+    <div class="stars" id="stars"></div>
+    
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>Dr. [Il Tuo Nome]</h1>
+            <p>Ricercatrice in Astrofisica | INAF</p>
+        </header>
+        
+        <!-- Navigation -->
+        <nav>
+            <a href="#about">Chi Sono</a>
+            <a href="#research">Ricerca</a>
+            <a href="#publications">Pubblicazioni</a>
+            <a href="#personal">Personale</a>
+            <a href="#contact">Contatti</a>
+        </nav>
+        
+        <!-- About Section -->
+        <section id="about">
+            <h2>Chi Sono</h2>
+            <p>
+                [Scrivi qui una breve introduzione su di te. Esempio: "Sono una ricercatrice in astrofisica presso l'INAF, 
+                specializzata in [il tuo campo]. Mi occupo di studiare [argomento] utilizzando [strumenti/tecniche]."]
+            </p>
+            <div class="image-placeholder">
+                [Inserisci qui la tua foto]<br>
+                <!-- Sostituisci con: <img src="tua-foto.jpg" alt="Tua foto"> -->
+            </div>
+        </section>
+        
+        <!-- Research Section -->
+        <section id="research">
+            <h2>La Mia Ricerca</h2>
+            <p>
+                [Descrivi brevemente i tuoi interessi di ricerca e le aree in cui lavori]
+            </p>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>Progetto 1</h3>
+                    <p>[Descrizione del progetto. Puoi includere il codice progetto INAF se vuoi]</p>
+                    <a href="#" class="link-button">Scopri di più</a>
+                </div>
+                
+                <div class="project-card">
+                    <h3>Progetto 2</h3>
+                    <p>[Descrizione del secondo progetto]</p>
+                    <a href="#" class="link-button">Scopri di più</a>
+                </div>
+                
+                <div class="project-card">
+                    <h3>Progetto 3</h3>
+                    <p>[Descrizione del terzo progetto]</p>
+                    <a href="#" class="link-button">Scopri di più</a>
+                </div>
+            </div>
+            
+            <div class="image-placeholder">
+                [Inserisci immagini delle tue osservazioni/dati]
+            </div>
+        </section>
+        
+        <!-- Publications Section -->
+        <section id="publications">
+            <h2>Pubblicazioni</h2>
+            <p>
+                Puoi trovare la lista completa delle mie pubblicazioni su:
+            </p>
+            <a href="https://ui.adsabs.harvard.edu/" class="link-button" target="_blank">NASA ADS</a>
+            <a href="https://orcid.org/" class="link-button" target="_blank">ORCID</a>
+            <a href="https://scholar.google.com/" class="link-button" target="_blank">Google Scholar</a>
+            
+            <h3 style="color: #f093fb; margin-top: 30px;">Pubblicazioni Selezionate</h3>
+            <p style="margin-top: 15px;">
+                • [Autori] (Anno). "Titolo della pubblicazione". Rivista. <a href="#" style="color: #667eea;">Link</a><br><br>
+                • [Autori] (Anno). "Titolo della pubblicazione". Rivista. <a href="#" style="color: #667eea;">Link</a><br><br>
+                • [Autori] (Anno). "Titolo della pubblicazione". Rivista. <a href="#" style="color: #667eea;">Link</a>
+            </p>
+        </section>
+        
+        <!-- Personal Section -->
+        <section id="personal">
+            <h2>Un Po' di Me</h2>
+            <p>
+                [Qui puoi scrivere qualcosa di più personale: i tuoi hobby, perché ti appassiona l'astronomia, 
+                interessi fuori dal lavoro, etc.]
+            </p>
+            <div class="image-placeholder">
+                [Foto personali, viaggi, conferenze, etc.]
+            </div>
+        </section>
+        
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2>Contatti</h2>
+            <p>
+                📧 Email: <a href="mailto:tuaemail@inaf.it" style="color: #667eea;">tuaemail@inaf.it</a><br><br>
+                🏢 Istituto: [Nome della tua sede INAF]<br><br>
+                📍 Indirizzo: [Indirizzo della sede]
+            </p>
+            <div style="margin-top: 20px;">
+                <a href="https://www.linkedin.com/in/tuoprofilo" class="link-button" target="_blank">LinkedIn</a>
+                <a href="https://twitter.com/tuoaccount" class="link-button" target="_blank">Twitter/X</a>
+                <a href="https://github.com/tuoaccount" class="link-button" target="_blank">GitHub</a>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2024 [Il Tuo Nome] | Creato con passione per l'universo ✨</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Crea stelle animate nello sfondo
+        const starsContainer = document.getElementById('stars');
+        const numberOfStars = 100;
+        
+        for (let i = 0; i < numberOfStars; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.width = Math.random() * 3 + 'px';
+            star.style.height = star.style.width;
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+        
+        // Scroll smooth per i link di navigazione
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
